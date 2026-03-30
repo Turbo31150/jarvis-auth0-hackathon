@@ -1,0 +1,135 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "jarvis-agent-auth"
+version = "1.0.0"
+description = "Secure Multi-Agent Orchestrator using Auth0 Token Vault"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "JARVIS AgentAuth Team", email = "team@jarvisagentauth.dev"}
+]
+requires-python = ">=3.9"
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: System :: Authentication",
+    "Topic :: System :: Distributed Computing",
+]
+keywords = [
+    "auth0",
+    "authentication",
+    "authorization",
+    "multi-agent",
+    "orchestration",
+    "security",
+    "consensus",
+    "audit",
+]
+
+dependencies = [
+    "requests>=2.31.0",
+    "httpx>=0.24.0",
+    "auth0-python>=4.20.0",
+    "PyJWT>=2.8.1",
+    "cryptography>=41.0.0",
+    "pydantic>=2.0.0",
+    "python-dotenv>=1.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.1.0",
+    "black>=23.0.0",
+    "flake8>=6.0.0",
+    "mypy>=1.0.0",
+    "isort>=5.12.0",
+]
+docs = [
+    "sphinx>=7.0.0",
+    "sphinx-rtd-theme>=1.3.0",
+]
+async = [
+    "aiohttp>=3.8.0",
+    "anyio>=3.7.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/jarvis-agentauth/jarvis-agentauth"
+Documentation = "https://jarvis-agentauth.readthedocs.io"
+Repository = "https://github.com/jarvis-agentauth/jarvis-agentauth"
+Issues = "https://github.com/jarvis-agentauth/jarvis-agentauth/issues"
+
+[tool.setuptools]
+packages = ["jarvis_agent_auth"]
+
+[tool.black]
+line-length = 100
+target-version = ["py39", "py310", "py311", "py312"]
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 100
+skip_gitignore = true
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+check_untyped_defs = true
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --cov=jarvis_agent_auth --cov-report=html --cov-report=term-missing"
+
+[tool.coverage.run]
+source = ["jarvis_agent_auth"]
+omit = [
+    "*/tests/*",
+    "*/test_*.py",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "if typing.TYPE_CHECKING:",
+]
